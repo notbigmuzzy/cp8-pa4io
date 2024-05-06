@@ -1,0 +1,22 @@
+#page {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+#sidebar {
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+}
+
+#page-body {
+	display: flex;
+	flex-direction: column;
+	width: calc(100% - 200px);
+}
+
+#topbar {
+	display: flex;
+	height: 80px;
+}

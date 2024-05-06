@@ -1,0 +1,1 @@
+pug -w  assets/templates/index.pug -o ../radiostranice.github.io/

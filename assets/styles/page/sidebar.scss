@@ -1,0 +1,16 @@
+#sidebar {
+	background: #2a3641;
+    background: -moz-linear-gradient(-45deg, #2a3641 0%, #111518 100%);
+    background: -webkit-linear-gradient(-45deg, #2a3641 0%, #111518 100%);
+    background: linear-gradient(135deg, #2a3641 0%, #111518 100%);
+
+    .sidebar-top {
+    	flex-grow: 9;
+    }
+
+    .sidebar-bottom {
+    	flex-grow: 1;
+    	min-height: 80px;
+    	background: linear-gradient(135deg, #2a3641 50%, #111518 100%);
+    }
+}
