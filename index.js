@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
           radioLabel.textContent = "Radio";
           stopButton.classList.add('stopin');
           clickedElement.classList.add('playin');
-          nyanCatImage.src = '/assets/icons/nyancat.gif';
+          nyanCatImage.src = 'assets/icons/nyancat.gif';
         }
       });
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
       radioName.textContent = "•͡˘㇁•͡˘";
       radioLabel.textContent = "___㇁";
       stopButton.classList.remove('stopin');
-      nyanCatImage.src = '/assets/icons/nyancat.png';
+      nyanCatImage.src = 'assets/icons/nyancat.png';
       audioPlayer.src = '';
     });
   };
