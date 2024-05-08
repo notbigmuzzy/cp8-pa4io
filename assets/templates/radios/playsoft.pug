@@ -2,7 +2,4 @@
 - var cover = "covers/playsoft.jpg";
 - var url = "https://stream.playradio.rs:8443/soft.mp3"
 
-radio-item(style="background-image: url(" + cover + ")")(data-url=url)(data-name=name)(data-cover=cover)
-	play-button
-		i ►
-		b ♫
+include #audio_player_template.pug
