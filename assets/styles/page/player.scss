@@ -80,7 +80,11 @@
 		audio-slider {
 			display: flex;
 			flex-grow: 9;
-			padding-right: 30px;
+			padding-right: 0;
+
+			@media (min-width: 480px) {
+				padding-right: 30px;
+			}
 
 			line-fill {
 				display: flex;
@@ -111,9 +115,13 @@
 		}
 
 		website-link {
-			display: block;
+			display: none;
 			width: 140px;
 			height: 60px;
+
+			@media (min-width: 480px) {
+				display: block;
+			}
 
 			a {
 				display: flex;
