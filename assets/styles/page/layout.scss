@@ -5,17 +5,25 @@
 }
 
 #sidebar {
-	display: flex;
+	display: none;
 	flex-direction: column;
 	width: 200px;
+
+	@media (min-width: 768px) {
+		display: flex;
+	}
 }
 
 #page-body {
 	display: flex;
 	flex-direction: column;
-	width: calc(100% - 200px);
+	width: 100%;
 	position: relative;
 	transform: matrix(1, 0, 0, 1, 0, 0);
+
+	@media (min-width: 768px) {
+		width: calc(100% - 200px);
+	}
 }
 
 #topbar {

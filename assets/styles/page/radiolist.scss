@@ -18,12 +18,24 @@
 			align-content: center;
 			justify-content: center;
 			position: relative;
-			width: 25%;
+			width: 50%;
 			height: 35%;
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-position: center;
 			overflow: hidden;
+
+			@media (min-width: 768px) {
+				width: 33.333%;
+			}
+
+			@media (min-width: 1024px) {
+				width: 25%;
+			}
+
+			@media (min-width: 1600px) {
+				width: 20%;
+			}
 
 			play-button {
 				pointer-events: none;
