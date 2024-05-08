@@ -17,6 +17,8 @@
 	}
 
 	.logo {
+		margin-right: 10px;
+
 		a {
 			display: flex;
 			flex-direction: column;
@@ -68,9 +70,27 @@
 				}
 			}
 		}
+	}
 
-		filter-list {
-			flex-grow: 9;
+	filter-list {
+		display: flex;
+		align-items: end;
+		flex-grow: 9;
+
+		.filters {
+			span {
+				margin: 0 5px;
+				padding: 0 5px;
+				font-family: monospace;
+				font-size: 16px;
+				line-height: 1;
+				cursor: pointer;
+
+				&:hover {
+					background-color: #fff;
+					color: #000;
+				}
+			}
 		}
 	}
 
