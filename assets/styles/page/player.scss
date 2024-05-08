@@ -40,7 +40,11 @@
 				cursor: pointer;
 
 				i {
-					background-color: rgba(255,255,255,0.75);
+					background-color: rgba(255,0,0,0.75);
+
+					&:last-child {
+						background-color: rgba(144,238,144,0.75);;
+					}
 				}
 			}
 
@@ -148,6 +152,20 @@
 
 					i {
 						opacity: 0;
+					}
+				}
+
+				&:hover {
+					span {
+						b {
+							background-color: lightblue;
+						}
+
+						&:last-child {
+							b {
+								background-color: pink;
+							}
+						}
 					}
 				}
 			}

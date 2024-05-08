@@ -74,10 +74,6 @@
 		}
 	}
 
-	.top-right {
-		//margin-top: 10px;
-	}
-
 	.menu {
 		display: flex;
 		flex-direction: column;
@@ -93,6 +89,20 @@
 
 			&:last-child {
 				margin-bottom: 0;
+			}
+		}
+
+		&:hover {
+			span {
+				background: yellow;
+
+				&:first-child {
+					background: cyan;
+				}
+
+				&:last-child {
+					background: lightgreen;
+				}
 			}
 		}
 	}
