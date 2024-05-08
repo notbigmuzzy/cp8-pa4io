@@ -28,6 +28,7 @@
                 line-height: 1.5;
                 font-weight: bold;
                 border-right: 5px solid transparent;
+                font-family: monospace;
 
                 &:hover {
                     cursor: pointer;
@@ -39,9 +40,68 @@
     }
 
     .sidebar-bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     	flex-grow: 1;
     	height: 80px;
         max-height: 80px;
     	background: linear-gradient(135deg, #2a3641 50%, #111518 100%);
+
+        a {
+            position: relative;
+            display: block;
+            height: 50px;
+            width: 90px;
+            border: 2px solid #fff;
+
+            &:after {
+                content: "";
+                display: block;
+                width: 0;
+                height: 0;
+                border-left: 40px solid rgba(0, 0, 0, 0);
+                border-right: 40px solid rgba(0, 0, 0, 0);
+                border-top: 30px solid #fff;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                position: relative;
+            }
+
+            span {
+                display: block;
+                position: absolute;
+                left: 0;
+                bottom: -2px;
+                right: 0;
+                text-align: center;
+                text-decoration: none;
+                color: #fff;
+                font-family: monospace;
+                font-weight: bold;
+                letter-spacing: 3px;
+                font-size: 13px;
+            }
+
+            &:hover {
+                height: 100%;
+                width: 100%;
+                border: 4px solid #fff;
+
+                &:after {
+                    border-left: 20px solid rgba(0, 0, 0, 0);
+                    border-right: 20px solid rgba(0, 0, 0, 0);
+                    border-top: 10px solid #fff;
+                }
+
+                span {
+                    bottom: 35%;
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 }
