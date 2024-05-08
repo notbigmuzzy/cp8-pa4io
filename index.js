@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
   clickOnRadio();
   pauseRadio();
 
-  //  
+  //  LOGIC
   function clickOnRadio() {
     const radioItems = document.querySelectorAll('radio-item');
     radioItems.forEach((radio) => {
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const radioLabel = document.querySelector('.radio-label');
           const nyanCatImage = document.getElementById('nyancat');
           const playerBar = document.getElementById('player');
+          const radioCover = clickedElement.getAttribute('data-cover');
 
           radioItems.forEach((item) => {
             item.classList.remove('playin');
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function() {
           stopButton.classList.add('stopin');
           clickedElement.classList.add('playin');
           nyanCatImage.src = 'assets/icons/nyancat.gif';
+          audioNavigator(clickedName,"r.a.d.i.o",radioCover)
         }
       });
 
@@ -60,4 +62,41 @@ document.addEventListener("DOMContentLoaded", function() {
       audioPlayer.src = '';
     });
   };
+
+  function audioNavigator(title,artist,cover) {
+    if ('mediaSession' in navigator) {
+
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: title,
+        artist: artist,
+        artwork: [
+          { src: cover, sizes: '96x96',   type: 'image/png' },
+          { src: cover, sizes: '128x128', type: 'image/png' },
+          { src: cover, sizes: '192x192', type: 'image/png' },
+          { src: cover, sizes: '256x256', type: 'image/png' },
+          { src: cover, sizes: '384x384', type: 'image/png' },
+          { src: cover, sizes: '512x512', type: 'image/png' },
+        ]
+      });
+
+      navigator.mediaSession.setActionHandler('play', function() {
+        document.getElementById('audioPlayer').play();
+      });
+
+      navigator.mediaSession.setActionHandler('pause', function() {
+        document.getElementById('audioPlayer').pause();
+      });
+
+      navigator.mediaSession.setActionHandler('stop', function() {
+        document.querySelectorAll('radio-item').forEach((item) => {
+          item.classList.remove('playin');
+        });
+        document.querySelector('.radio-name').textContent = "•͡˘㇁•͡˘";
+        document.querySelector('.radio-label').textContent = "___㇁";
+        document.querySelector('stop-button').classList.remove('stopin');
+        document.getElementById('nyancat').src = 'assets/icons/nyancat.png';
+        document.getElementById('audioPlayer').src = '';
+      });
+    }
+  }
 });
