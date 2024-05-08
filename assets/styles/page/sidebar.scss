@@ -1,4 +1,5 @@
 #sidebar {
+    color: #fff;
 	background: #2a3641;
     background: -moz-linear-gradient(-45deg, #2a3641 0%, #111518 100%);
     background: -webkit-linear-gradient(-45deg, #2a3641 0%, #111518 100%);
@@ -6,11 +7,41 @@
 
     .sidebar-top {
     	flex-grow: 9;
+        padding: 50px 0 0;
+
+        side-title {
+            display: block;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 12px;
+            font-weight: bold;
+            padding: 0 20px;
+        }
+
+        .info-list {
+            padding: 20px 0;
+
+            li {
+                width: 100%;
+                padding: 10px;
+                padding-left: 25px;
+                font-size: 16px;
+                line-height: 1.5;
+                font-weight: bold;
+                border-right: 5px solid transparent;
+
+                &:hover {
+                    cursor: pointer;
+                    background: #06080A;
+                    border-right: 5px solid #C198ED;
+                }
+            }
+        }
     }
 
     .sidebar-bottom {
     	flex-grow: 1;
-    	min-height: 80px;
+    	height: 80px;
+        max-height: 80px;
     	background: linear-gradient(135deg, #2a3641 50%, #111518 100%);
     }
 }

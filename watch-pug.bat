@@ -1,1 +1,1 @@
-pug -w  assets/templates/index.pug -o ../radiostranice.github.io/
+pug -w  assets/templates/index.pug -o ../cp8-pa4io/

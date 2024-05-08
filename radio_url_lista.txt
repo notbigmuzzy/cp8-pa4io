@@ -9,7 +9,7 @@ NAXI CAFE	- https://naxidigital-cafe128ssl.streaming.rs:8022/;*.mp3
 KAROLINA	- https://streaming.karolina.rs/karolina.mp3
 PINGVIN		- https://uzivo.radiopingvin.com/strani1
 EVERGREN	- https://naxidigital-evergreen128ssl.streaming.rs:8012/;*.mp3
-NAXI DANCE	- https://naxidigital-dance128ssl.streaming.rs:8112/;*.mp3
+DANCE		- https://naxidigital-dance128ssl.streaming.rs:8112/;*.mp3
 FRESH		- https://naxidigital-fresh128ssl.streaming.rs:8212/;*.mp3
 NAXI ROCK 	- https://naxidigital-rock128ssl.streaming.rs:8182/;*.mp3
 LOVE		- https://naxidigital-love128ssl.streaming.rs:8102/;*.mp3
@@ -21,6 +21,7 @@ AS FM 		- https://mastermedia.shoutca.st/proxy/radioasfm?mp=/stream
 LAGUNA 		- https://live.radiolaguna.rs/laguna
 TOP FM 		- https://topfm64ssl.streaming.rs:9287/;*.mp3
 SIGNAL 		- https://radio.dukahosting.com:7021/;*.mp3
+
 PLAY PARTY  - https://stream.playradio.rs:8443/party.mp3
 PLAY ROCK 	- https://stream.playradio.rs:8443/rock.mp3
 PLAY SOFT 	- https://stream.playradio.rs:8443/soft.mp3

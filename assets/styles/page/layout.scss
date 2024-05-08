@@ -14,9 +14,12 @@
 	display: flex;
 	flex-direction: column;
 	width: calc(100% - 200px);
+	position: relative;
+	transform: matrix(1, 0, 0, 1, 0, 0);
 }
 
 #topbar {
 	display: flex;
 	height: 80px;
+	min-height: 80px;
 }
