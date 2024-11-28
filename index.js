@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
           item.classList.remove('playin');
         });
         document.querySelector('.radio-name').textContent = "•͡˘㇁•͡˘";
-        document.querySelector('.radio-label').textContent = "___㇁";
+        document.querySelector('.radio-label').textContent = "___㇁ .♫. .♫. .♫. .♫.";
         document.querySelector('stop-button').classList.remove('stopin');
         document.getElementById('nyancat').src = 'assets/icons/nyancat.png';
         document.getElementById('audioPlayer').src = '';

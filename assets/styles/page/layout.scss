@@ -21,9 +21,9 @@
 	position: relative;
 	transform: matrix(1, 0, 0, 1, 0, 0);
 
-	@media (min-width: 768px) {
-		width: calc(100% - 200px);
-	}
+	// @media (min-width: 768px) {
+	// 	width: calc(100% - 200px);
+	// }
 }
 
 #topbar {
