@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // INIT FUNCTIONS 
   clickOnRadio();
   pauseRadio();
+  filterRadioStations();
 
   //  LOGIC
   function clickOnRadio() {
@@ -50,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
       const radioName = document.querySelector('.radio-name');
       const radioLabel = document.querySelector('.radio-label');
       const nyanCatImage = document.getElementById('nyancat');
+      const listOfRadios = document.querySelector('.list-of-radios');
+
 
       radioItems.forEach((item) => {
         item.classList.remove('playin');
@@ -60,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
       stopButton.classList.remove('stopin');
       nyanCatImage.src = 'assets/icons/nyancat.png';
       audioPlayer.src = '';
+      listOfRadios.classList.remove('show-playin', 'show-favs');
     });
   };
 
@@ -98,5 +102,26 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('audioPlayer').src = '';
       });
     }
+  };
+
+  function filterRadioStations () {
+    const playinFilter = document.querySelector('.show-playin');
+    //const favsFilter = document.querySelector('.show-favs');
+    const allFilter = document.querySelector('.show-all');
+    const listOfRadios = document.querySelector('.list-of-radios');
+
+    playinFilter.addEventListener('click', function(e) {
+      listOfRadios.classList.add('show-playin');
+      listOfRadios.classList.remove('show-favs');
+    });
+
+    // favsFilter.addEventListener('click', function(e) {
+    //   listOfRadios.classList.add('show-favs');
+    //   listOfRadios.classList.remove('show-playin');
+    // });
+
+    allFilter.addEventListener('click', function(e) {
+      listOfRadios.classList.remove('show-playin', 'show-favs');
+    });
   }
 });

@@ -108,6 +108,26 @@
 				}
 			}
 		}
+
+		&.show-playin {
+			justify-content: center;
+			align-items: center;
+
+			radio-item:not(.playin) {
+				display: none !important;
+			}
+
+			radio-item.playin {
+				width: 50%;
+				height: 0;
+				padding-bottom: 50%;
+				box-shadow: 20px 20px #fff;
+
+				play-button {
+					display: none;
+				}
+			}
+		}
 	}
 }
 
