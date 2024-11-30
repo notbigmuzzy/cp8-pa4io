@@ -38,14 +38,22 @@
 				}
 			}
 
+			i {
+				background-color: rgba(255,0,0,0.75);
+
+				&:last-child {
+					background-color: rgba(144,238,144,0.75);
+				}
+			}
+			
 			&:hover {
 				cursor: pointer;
 
 				i {
-					background-color: rgba(255,0,0,0.75);
-
+					background-color: rgba(144,238,144,0.75);
+					
 					&:last-child {
-						background-color: rgba(144,238,144,0.75);;
+						background-color: rgba(255,0,0,0.75);	
 					}
 				}
 			}
@@ -162,15 +170,27 @@
 					}
 				}
 
+				span {
+					b {
+						background-color: lightblue;
+					}
+
+					&:last-child {
+						b {
+							background-color: pink;
+						}
+					}
+				}
+
 				&:hover {
 					span {
 						b {
-							background-color: lightblue;
+							background-color: pink;
 						}
 
 						&:last-child {
 							b {
-								background-color: pink;
+								background-color: lightblue;
 							}
 						}
 					}
