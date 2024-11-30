@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
       radio.addEventListener('click', function(e) {
         const clickedElement = e.target;
 
-        if (!clickedElement.classList.contains('playin')) {
+        if (!document.getElementById('page-body').classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
           const clickedUrl = clickedElement.getAttribute('data-url');
           const clickedName = clickedElement.getAttribute('data-name');
           const audioPlayer = document.getElementById('audioPlayer');
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", function() {
           const nyanCatImage = document.getElementById('nyancat');
           const playerBar = document.getElementById('player');
           const radioCover = clickedElement.getAttribute('data-cover');
-          const pageBody = document.querySelector('#page-body');
 
           radioItems.forEach((item) => {
             item.classList.remove('playin');
@@ -37,8 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
           clickedElement.classList.add('playin');
           nyanCatImage.src = 'assets/icons/nyancat.gif';
           audioNavigator(clickedName,"r.a.d.i.o",radioCover)
-          pageBody.classList.add('show-playin');
-          pageBody.classList.remove('show-favs');
         }
       });
 
