@@ -108,26 +108,31 @@
 				}
 			}
 		}
+	}
+}
 
-		&.show-playin {
-			justify-content: center;
-			align-items: center;
+.show-playin {
+	.filter-playin {
+		// border-color: #fff !important;
+	}
 
-			radio-item:not(.playin) {
-				display: none !important;
-			}
+	#radiolist .list-of-radios {
+		justify-content: center;
+		align-items: center;
 
-			radio-item.playin {
-				width: 50%;
-				height: 0;
-				padding-bottom: 50%;
-				box-shadow: 20px 20px #fff;
+		radio-item:not(.playin) {
+			display: none !important;
+		}
 
-				play-button {
-					display: none;
-				}
+		radio-item.playin {
+			width: 50%;
+			height: 0;
+			padding-bottom: 25%;
+			box-shadow: 20px 20px #fff;
+
+			play-button {
+				display: none;
 			}
 		}
 	}
 }
-

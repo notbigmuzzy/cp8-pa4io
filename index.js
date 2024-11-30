@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const nyanCatImage = document.getElementById('nyancat');
           const playerBar = document.getElementById('player');
           const radioCover = clickedElement.getAttribute('data-cover');
+          const pageBody = document.querySelector('#page-body');
 
           radioItems.forEach((item) => {
             item.classList.remove('playin');
@@ -36,6 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
           clickedElement.classList.add('playin');
           nyanCatImage.src = 'assets/icons/nyancat.gif';
           audioNavigator(clickedName,"r.a.d.i.o",radioCover)
+          pageBody.classList.add('show-playin');
+          pageBody.classList.remove('show-favs');
         }
       });
 
@@ -51,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const radioName = document.querySelector('.radio-name');
       const radioLabel = document.querySelector('.radio-label');
       const nyanCatImage = document.getElementById('nyancat');
-      const listOfRadios = document.querySelector('.list-of-radios');
+      const pageBody = document.querySelector('#page-body');
 
 
       radioItems.forEach((item) => {
@@ -63,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
       stopButton.classList.remove('stopin');
       nyanCatImage.src = 'assets/icons/nyancat.png';
       audioPlayer.src = '';
-      listOfRadios.classList.remove('show-playin', 'show-favs');
+      pageBody.classList.remove('show-playin', 'show-favs');
     });
   };
 
@@ -105,23 +108,23 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   function filterRadioStations () {
-    const playinFilter = document.querySelector('.show-playin');
+    const playinFilter = document.querySelector('.filter-playin');
     //const favsFilter = document.querySelector('.show-favs');
-    const allFilter = document.querySelector('.show-all');
-    const listOfRadios = document.querySelector('.list-of-radios');
+    const allFilter = document.querySelector('.filter-all');
+    const pageBody = document.querySelector('#page-body');
 
     playinFilter.addEventListener('click', function(e) {
-      listOfRadios.classList.add('show-playin');
-      listOfRadios.classList.remove('show-favs');
+      pageBody.classList.add('show-playin');
+      pageBody.classList.remove('show-favs');
     });
 
     // favsFilter.addEventListener('click', function(e) {
-    //   listOfRadios.classList.add('show-favs');
-    //   listOfRadios.classList.remove('show-playin');
+    //   pageBody.classList.add('show-favs');
+    //   pageBody.classList.remove('show-playin');
     // });
 
     allFilter.addEventListener('click', function(e) {
-      listOfRadios.classList.remove('show-playin', 'show-favs');
+      pageBody.classList.remove('show-playin', 'show-favs');
     });
   }
 });
