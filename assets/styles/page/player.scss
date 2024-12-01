@@ -18,7 +18,7 @@
 		display: flex;
 		width: 100%;
 		height: 100%;
-		padding: 10px;
+		padding: 10px 0 10px 10px;
 
 		stop-button {
 			display: flex;
@@ -70,9 +70,8 @@
 		radio-name {
 			display: flex;
 			flex-direction: column;
-			width: 140px;
+			width: 130px;
 			height: 60px;
-			margin-right: 10px;
 			overflow-wrap: break-word;
 			justify-content: center;
 			align-items: center;
@@ -98,6 +97,7 @@
 		.stopin + radio-name {
 			border-right: 1px dashed #ccc;
   			padding-right: 10px;
+			margin-right: 10px;
 		}
 
 		audio-slider {

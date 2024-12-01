@@ -78,7 +78,8 @@
 		flex-grow: 9;
 
 		.filters {
-			span {
+			.filter-all,
+			.filter-playin {
 				margin: 0 5px;
 				padding: 10px 15px;
 				font-family: monospace;
@@ -92,6 +93,16 @@
 					color: #000;
 				}
 			}
+
+			.filter-playin {
+				color: #333;
+				pointer-events: none;
+			}
+		}
+
+		&.playin-some-stuff .filter-playin {
+			color: #fff;
+			pointer-events: initial;
 		}
 	}
 
