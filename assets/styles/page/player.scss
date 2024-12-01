@@ -24,7 +24,7 @@
 			display: flex;
 			width: 60px;
 			height: 60px;
-			margin-right: 20px;
+			margin-right: 10px;
 			display: none;
 
 			i {
@@ -70,13 +70,13 @@
 		radio-name {
 			display: flex;
 			flex-direction: column;
-			width: 120px;
+			width: 140px;
 			height: 60px;
 			margin-right: 10px;
 			overflow-wrap: break-word;
 			justify-content: center;
 			align-items: center;
-			text-align: left;
+			text-align: right;
 
 			.radio-name {
 				width: 100%;
@@ -93,6 +93,11 @@
 				font-style: normal;
 				color: rgba(255, 255, 255, 0.5);
 			}
+		}
+
+		.stopin + radio-name {
+			border-right: 1px dashed #ccc;
+  			padding-right: 10px;
 		}
 
 		audio-slider {

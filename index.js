@@ -29,13 +29,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
           audioPlayer.src = clickedUrl;
           audioPlayer.play();
-          playerBar.classList.add('popup');
+          // playerBar.classList.add('popup');
           radioName.textContent = clickedName;
           radioLabel.textContent = "Radio";
           stopButton.classList.add('stopin');
           clickedElement.classList.add('playin');
-          nyanCatImage.src = 'assets/icons/nyancat.gif';
+          // nyanCatImage.src = 'assets/icons/nyancat.gif';
           audioNavigator(clickedName,"r.a.d.i.o",radioCover)
+          document.title = '♫♪.♪♫.♪♫ Now playing: ' + clickedName + ' radio station ♪♫.♫♪.♫♪';
         }
       });
 
@@ -58,12 +59,13 @@ document.addEventListener("DOMContentLoaded", function() {
         item.classList.remove('playin');
       });
 
-      radioName.textContent = "•͡˘㇁•͡˘";
-      radioLabel.textContent = "___㇁";
+      radioName.textContent = "Play That";
+      radioLabel.textContent = "Funky Music";
       stopButton.classList.remove('stopin');
-      nyanCatImage.src = 'assets/icons/nyancat.png';
+      // nyanCatImage.src = 'assets/icons/nyancat.png';
       audioPlayer.src = '';
       pageBody.classList.remove('show-playin', 'show-favs');
+      document.title = '░.░C░.░P░.░8░.░.░.░P░.░A░.░4░.░I░.░O░.░';
     });
   };
 
@@ -95,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelectorAll('radio-item').forEach((item) => {
           item.classList.remove('playin');
         });
-        document.querySelector('.radio-name').textContent = "•͡˘㇁•͡˘";
-        document.querySelector('.radio-label').textContent = "___㇁ .♫. .♫. .♫. .♫.";
+        document.querySelector('.radio-name').textContent = "Play That";
+        document.querySelector('.radio-label').textContent = "Funky Music";
         document.querySelector('stop-button').classList.remove('stopin');
         document.getElementById('nyancat').src = 'assets/icons/nyancat.png';
         document.getElementById('audioPlayer').src = '';
