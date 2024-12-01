@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
       audioPlayer.src = '';
       pageBody.classList.remove('show-playin', 'show-favs');
       filterList.classList.remove('playin-some-stuff');
-      document.title = '░.░C░.░P░.░8░.░.░.░P░.░A░.░4░.░I░.░O░.░';
+      document.title = '.░C░.░P░.░8░.░.░.░P░.░A░.░4░.░I░.░O░.';
     });
   };
 
