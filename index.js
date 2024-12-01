@@ -127,6 +127,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     allFilter.addEventListener('click', function(e) {
       pageBody.classList.remove('show-playin', 'show-favs');
+
+      const filterList = document.querySelector('filter-list');
+      if (filterList.classList.contains('playin-some-stuff')) {
+        const playingRadioStation = document.querySelector('.playin');
+        const positionFromTopOfScrollableDiv = playingRadioStation.offsetTop;
+        const listOfRadios = document.querySelector('.list-of-radios');
+        listOfRadios.scrollTop = positionFromTopOfScrollableDiv - 80;
+      }
     });
   }
 });

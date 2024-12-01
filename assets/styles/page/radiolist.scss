@@ -63,14 +63,17 @@
 				background-color: rgba(0,0,0,0.5);
 
 				i {
-					color: rgba(255, 255, 255, 0.3);
+					color: hsl(0, 0%, 100%);
 					font-size: 100px;
 					line-height: 1;
+					text-shadow: 0 0 2px black;
+					opacity: 0.15;
 				}
 
 				b {
 					display: none;
-					color: rgba(0, 0, 0, 0.6);
+					color: rgba(0, 0, 0, 0.75);
+					text-shadow: 0px 0px 20px #fff;
 					font-size: 100px;
 					line-height: 1;
 				}
@@ -85,14 +88,11 @@
 					cursor: pointer;
 
 					play-button {
-						box-shadow: inset 0px 0px 20px #000;
-					}
-
-					play-button {
 						background-color: rgba(0,0,0,0.25);
+						box-shadow: inset 0px 0px 20px #000;
 
 						i {
-							color: rgba(255, 255, 255, 0.9);
+							opacity: 0.85;
 						}
 					}
 				}
@@ -100,7 +100,7 @@
 
 			&.playin {
 				play-button {
-					background: rgba(206, 160, 255, 0.6);
+					background: rgba(206, 160, 255, 0.75);
 
 					i {
 						display: none;
@@ -125,13 +125,25 @@
 			font-family: monospace;
 
 			station-name {
+				position: relative;
 				display: block;
-				font-size: 20px;
-				font-weight: bold;
+				height: 20px;
 				text-align: center;
 				margin-bottom: 20px;
 				background: #ffffff;
-				color: #141a1f;
+
+				span {
+					font-size: 32px;
+					font-weight: bold;
+					color: #141a1f;
+					text-transform: uppercase;
+					margin-top: -6px;
+					position: absolute;
+					left: 50%;
+					transform: translateX(-50%);
+					letter-spacing: 20px;
+					white-space: nowrap;
+				}
 			}
 
 			station-description {
@@ -148,6 +160,7 @@
 				font-weight: bold;
 				margin-bottom: 20px;
 				text-decoration: underline;
+				text-align: right;
 			}
 
 			img-wrapper {
@@ -191,6 +204,7 @@
 			width: 50%;
 			height: auto;
 			padding: 20px;
+			max-width: 680px;
 
 			play-button {
 				display: none;
