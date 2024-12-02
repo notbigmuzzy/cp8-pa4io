@@ -79,7 +79,8 @@
 
 		.filters {
 			.filter-all,
-			.filter-playin {
+			.filter-playin,
+			.filter-search {
 				margin: 0 5px;
 				padding: 10px 15px;
 				font-family: monospace;
@@ -91,12 +92,44 @@
 				&:hover {
 					background-color: #fff;
 					color: #000;
+
+					input {
+						background-color: #fff;
+						color: #000;
+					}
 				}
 			}
 
 			.filter-playin {
 				color: #333;
 				pointer-events: none;
+			}
+
+			.filter-search {
+				font-weight: bold;
+
+				input {
+					width: 0px;
+					border: none;
+					background: transparent;
+					color: #fff;
+					padding: 0;
+					font-size: 16px;
+					font-family: monospace;
+					letter-spacing: 2px;
+					border-bottom: 1px dashed;
+					text-transform: uppercase;
+				}
+
+				&.show-search {
+					span {
+						display: none;
+					}
+
+					input {
+						width: 120px;
+					}
+				}
 			}
 		}
 

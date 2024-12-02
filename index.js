@@ -19,15 +19,13 @@ document.addEventListener("DOMContentLoaded", function() {
           const stopButton = document.querySelector('stop-button');
           const radioName = document.querySelector('.radio-name');
           const radioLabel = document.querySelector('.radio-label');
-          const nyanCatImage = document.getElementById('nyancat');
           const playerBar = document.getElementById('player');
           const radioCover = clickedElement.getAttribute('data-cover');
           const filterList = document.querySelector('filter-list');
+          const searchFilter = document.querySelector('.filter-search');
+          const searchFilterInput = document.querySelector('.filter-search input');
 
-          radioStations.forEach((item) => {
-            item.classList.remove('playin');
-          });
-
+          radioStations.forEach((item) => { item.classList.remove('playin'); });
           audioPlayer.src = clickedUrl;
           audioPlayer.play();
           // playerBar.classList.add('popup');
@@ -113,11 +111,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const playinFilter = document.querySelector('.filter-playin');
     //const favsFilter = document.querySelector('.show-favs');
     const allFilter = document.querySelector('.filter-all');
+    const searchFilter = document.querySelector('.filter-search');
+    const searchFilterInput = document.querySelector('.filter-search input');
     const pageBody = document.querySelector('#page-body');
+    const radioStations = document.querySelectorAll('radio-item');
 
     playinFilter.addEventListener('click', function(e) {
       pageBody.classList.add('show-playin');
       pageBody.classList.remove('show-favs');
+      searchFilter.classList.remove('show-search');
+      searchFilterInput.value = '';
+      radioStations.forEach(station => { station.classList.remove('search-hide'); });
     });
 
     // favsFilter.addEventListener('click', function(e) {
@@ -127,13 +131,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
     allFilter.addEventListener('click', function(e) {
       pageBody.classList.remove('show-playin', 'show-favs');
+      searchFilter.classList.remove('show-search');
+      searchFilterInput.value = '';
 
       const filterList = document.querySelector('filter-list');
       if (filterList.classList.contains('playin-some-stuff')) {
         const playingRadioStation = document.querySelector('.playin');
-        const positionFromTopOfScrollableDiv = playingRadioStation.offsetTop;
         const listOfRadios = document.querySelector('.list-of-radios');
+        radioStations.forEach(station => { station.classList.remove('search-hide'); });
+        
+        const positionFromTopOfScrollableDiv = playingRadioStation.offsetTop;
         listOfRadios.scrollTop = positionFromTopOfScrollableDiv - 80;
+      }
+    });
+
+    searchFilter.addEventListener('click', function(e) {
+      searchFilter.classList.add('show-search');
+      searchFilterInput.focus();
+    });
+
+    searchFilterInput.addEventListener('keyup', (e) => {
+      if (e.target.value.length > 0) {
+        pageBody.classList.remove('show-playin', 'show-favs');
+        const filters = e.target.value.split(/\s/).filter(s => s.trim().length > 0).map(s => new RegExp(s, 'gi'));
+        radioStations.forEach(station => station.classList.toggle('search-hide', !filters.some(regex => station.dataset.name.match(regex))));
+      } else {
+        radioStations.forEach(station => {
+          station.classList.remove('search-hide');
+        })
       }
     });
   }

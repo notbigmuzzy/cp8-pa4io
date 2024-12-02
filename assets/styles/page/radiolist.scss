@@ -7,6 +7,7 @@
 	.list-of-radios {
 		display: flex;
 		flex-wrap: wrap;
+		align-content: baseline;
 		height: 100%;
 		overflow-y: scroll;
 		padding: 80px 0 0;
@@ -101,6 +102,8 @@
 			&.playin {
 				play-button {
 					background: rgba(206, 160, 255, 0.75);
+					align-content: baseline;
+					justify-content: left;
 
 					i {
 						display: none;
@@ -108,8 +111,16 @@
 
 					b { 
 						display: block;
+
+						span {
+							word-spacing: 10000px;
+						}
 					}
 				}
+			}
+
+			&.search-hide {
+				display: none !important;
 			}
 		}
 
@@ -195,6 +206,7 @@
 	#radiolist .list-of-radios {
 		justify-content: center;
 		align-items: center;
+		align-content: center;
 
 		radio-item:not(.playin) {
 			display: none !important;
