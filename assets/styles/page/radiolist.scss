@@ -213,10 +213,14 @@
 		}
 
 		radio-item.playin {
-			width: 50%;
+			width: 90%;
 			height: auto;
 			padding: 20px;
-			max-width: 680px;
+
+			@media (min-width: 980px) {
+				width: 50%;
+				max-width: 680px;
+			}
 
 			play-button {
 				display: none;

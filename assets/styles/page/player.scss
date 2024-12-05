@@ -19,6 +19,11 @@
 		width: 100%;
 		height: 100%;
 		padding: 10px 0 10px 10px;
+		flex-direction: row-reverse;
+
+		@media (min-width: 720px) {
+			flex-direction: row;
+		}
 
 		stop-button {
 			display: flex;
@@ -26,6 +31,11 @@
 			height: 60px;
 			margin-right: 10px;
 			display: none;
+			margin-left: 20px;
+
+			@media (min-width: 720px) {
+				margin-left: 0;
+			}
 
 			i {
 				display: block;
@@ -61,8 +71,10 @@
 			&.stopin {
 				display: flex;
 
-				&~website-link {
-					display: flex;
+				@media (min-width: 720px) {
+					&~website-link {
+						display: flex !important;
+					}
 				}
 			}
 		}
@@ -78,6 +90,7 @@
 			text-align: right;
 
 			.radio-name {
+				white-space: nowrap;
 				width: 100%;
 				font-size: 22px;
 				font-weight: bold;
@@ -94,10 +107,12 @@
 			}
 		}
 
-		.stopin + radio-name {
-			border-right: 1px dashed #ccc;
-  			padding-right: 20px;
-			margin-right: 20px;
+		@media (min-width: 720px) {
+			.stopin + radio-name {
+				border-right: 1px dashed #ccc;
+	  			padding-right: 20px;
+				margin-right: 20px;
+			}
 		}
 
 		audio-slider {
@@ -138,13 +153,9 @@
 		}
 
 		website-link {
-			display: none;
+			display: none !important;
 			width: 140px;
 			height: 60px;
-
-			// @media (min-width: 480px) {
-			// 	display: block;
-			// }
 
 			a {
 				display: flex;
