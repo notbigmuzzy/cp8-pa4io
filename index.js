@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!document.getElementById('page-body').classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
           const clickedUrl = clickedElement.getAttribute('data-url');
           const clickedName = clickedElement.getAttribute('data-name');
+          const rndID = Math.floor(Math.random() * (999999999 - 10 + 1) + 10);
           const audioPlayer = document.getElementById('audioPlayer');
           const stopButton = document.querySelector('stop-button');
           const radioName = document.querySelector('.radio-name');
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const searchFilterInput = document.querySelector('.filter-search input');
 
           radioStations.forEach((item) => { item.classList.remove('playin'); });
-          audioPlayer.src = clickedUrl;
+          audioPlayer.src = clickedUrl + '?rndid=' + rndID;
           audioPlayer.play();
           // playerBar.classList.add('popup');
           radioName.textContent = clickedName;
