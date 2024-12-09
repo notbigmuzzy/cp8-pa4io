@@ -19,6 +19,13 @@
 
 	.logo {
 		margin-right: 0;
+		width: 100px;
+		overflow: hidden;
+
+		@media (min-width: 500px) {
+			width: initial;
+			overflow: initial;
+		}
 
 		@media (min-width: 980px) {
 			margin-right: 10px;

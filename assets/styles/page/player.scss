@@ -29,12 +29,13 @@
 			display: flex;
 			width: 60px;
 			height: 60px;
-			margin-right: 10px;
+			margin-right: 0;
 			display: none;
 			margin-left: 20px;
 
 			@media (min-width: 720px) {
 				margin-left: 0;
+				margin-right: 10px;
 			}
 
 			i {
