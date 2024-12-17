@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const clickedUrl = clickedElement.getAttribute('data-url');
           const clickedName = clickedElement.getAttribute('data-name');
           const rndID = Math.floor(Math.random() * (999999999 - 10 + 1) + 10);
-          const audioPlayer = document.getElementById('audioPlayer');
+          const audioPlayer = videojs('videojs-audio');
           const stopButton = document.querySelector('stop-button');
           const radioName = document.querySelector('.radio-name');
           const radioLabel = document.querySelector('.radio-label');
@@ -27,27 +27,24 @@ document.addEventListener("DOMContentLoaded", function() {
           const searchFilterInput = document.querySelector('.filter-search input');
 
           radioStations.forEach((item) => { item.classList.remove('playin'); });
-          audioPlayer.src = clickedUrl + '?rndid=' + rndID;
+          audioPlayer.src({ type: 'video/mp4', src: clickedUrl + '?rndid=' + rndID });
           audioPlayer.play();
-          // playerBar.classList.add('popup');
           radioName.textContent = clickedName;
           radioLabel.textContent = "Radio";
           stopButton.classList.add('stopin');
           clickedElement.classList.add('playin');
-          // nyanCatImage.src = 'assets/icons/nyancat.gif';
           audioNavigator(clickedName,"r.a.d.i.o",radioCover);
           filterList.classList.add('playin-some-stuff');
           document.title = '♫♪.♪♫.♪♫ Now playing: ' + clickedName + ' radio station ♪♫.♫♪.♫♪';
         }
       });
-
     });
   };
 
   function stopRadio() {
     const stopButton = document.querySelector('stop-button');
     stopButton.addEventListener('click', function(e) {
-      const audioPlayer = document.getElementById('audioPlayer');
+      const audioPlayer = videojs('videojs-audio');
       const radioStations = document.querySelectorAll('radio-item');
       const stopButton = document.querySelector('stop-button');
       const radioName = document.querySelector('.radio-name');
@@ -63,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function() {
       radioName.textContent = "Play That";
       radioLabel.textContent = "Funky Music";
       stopButton.classList.remove('stopin');
-      // nyanCatImage.src = 'assets/icons/nyancat.png';
-      audioPlayer.src = '';
+      audioPlayer.pause();
+      audioPlayer.src('');
       pageBody.classList.remove('show-playin', 'show-favs');
       filterList.classList.remove('playin-some-stuff');
       document.title = '.░C░.░P░.░8░.░.░.░P░.░A░.░4░.░I░.░O░.';
@@ -88,11 +85,13 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       navigator.mediaSession.setActionHandler('play', function() {
-        document.getElementById('audioPlayer').play();
+        const audioPlayer = videojs('videojs-audio');
+        audioPlayer.play();
       });
 
       navigator.mediaSession.setActionHandler('pause', function() {
-        document.getElementById('audioPlayer').pause();
+        const audioPlayer = videojs('videojs-audio');
+        audioPlayer.pause();
       });
 
       navigator.mediaSession.setActionHandler('stop', function() {
@@ -102,8 +101,9 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector('.radio-name').textContent = "Play That";
         document.querySelector('.radio-label').textContent = "Funky Music";
         document.querySelector('stop-button').classList.remove('stopin');
-        document.getElementById('nyancat').src = 'assets/icons/nyancat.png';
-        document.getElementById('audioPlayer').src = '';
+        const audioPlayer = videojs('videojs-audio');
+        audioPlayer.pause();
+        audioPlayer.src('');
       });
     }
   };

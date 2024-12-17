@@ -1,5 +1,12 @@
 div#player
-	audio#audioPlayer(src="")
+	video(
+		id="videojs-audio",
+		class="video-js",
+		preload="auto",
+		width="0",
+		height="0",
+		data-setup="{}"
+	)
 	player-controls
 		stop-button
 			i.left-part
