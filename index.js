@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
           const clickedName = clickedElement.getAttribute('data-name');
           const rndID = Math.floor(Math.random() * (999999999 - 10 + 1) + 10);
           const audioPlayer = videojs('videojs-audio');
+          let audioType = '';
           const stopButton = document.querySelector('stop-button');
           const radioName = document.querySelector('.radio-name');
           const radioLabel = document.querySelector('.radio-label');
@@ -26,8 +27,16 @@ document.addEventListener("DOMContentLoaded", function() {
           const searchFilter = document.querySelector('.filter-search');
           const searchFilterInput = document.querySelector('.filter-search input');
 
+          if (clickedUrl.includes('.m3u8')) {
+            audioType = 'application/x-mpegURL';
+          } else {
+            audioType = 'video/mp4';
+          }
+
+          console.log(audioType)
+
           radioStations.forEach((item) => { item.classList.remove('playin'); });
-          audioPlayer.src({ type: 'video/mp4', src: clickedUrl + '?rndid=' + rndID });
+          audioPlayer.src({ type: audioType, src: clickedUrl + '?rndid=' + rndID });
           audioPlayer.play();
           radioName.textContent = clickedName;
           radioLabel.textContent = "Radio";
