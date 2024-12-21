@@ -33,8 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
             audioType = 'video/mp4';
           }
 
-          console.log(audioType)
-
           radioStations.forEach((item) => { item.classList.remove('playin'); });
           audioPlayer.src({ type: audioType, src: clickedUrl + '?rndid=' + rndID });
           audioPlayer.play();
