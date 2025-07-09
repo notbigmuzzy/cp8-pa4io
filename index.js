@@ -1,83 +1,92 @@
 document.addEventListener("DOMContentLoaded", function() {
+  // Cache DOM elements for better performance
+  const elements = {
+    pageBody: document.getElementById('page-body'),
+    radioStations: document.querySelectorAll('radio-item'),
+    stopButton: document.querySelector('stop-button'),
+    radioName: document.querySelector('.radio-name'),
+    radioLabel: document.querySelector('.radio-label'),
+    filterList: document.querySelector('filter-list'),
+    searchFilter: document.querySelector('.filter-search'),
+    searchFilterInput: document.querySelector('.filter-search input'),
+    playinFilter: document.querySelector('.filter-playin'),
+    allFilter: document.querySelector('.filter-all'),
+    listOfRadios: document.querySelector('.list-of-radios')
+  };
 
   // INIT FUNCTIONS 
   playRadio();
   stopRadio();
   filterRadioStations();
 
+  // Helper functions
+  function clearPlayingState() {
+    elements.radioStations.forEach(station => station.classList.remove('playin'));
+  }
+
+  function updatePlayingState(clickedElement, clickedName, radioCover) {
+    elements.radioName.textContent = clickedName;
+    elements.radioLabel.textContent = "Radio";
+    elements.stopButton.classList.add('stopin');
+    clickedElement.classList.add('playin');
+    audioNavigator(clickedName, "r.a.d.i.o", radioCover);
+    elements.filterList.classList.add('playin-some-stuff');
+    document.title = '♫♪.♪♫.♪♫ Now playing: ' + clickedName + ' radio station ♪♫.♫♪.♫♪';
+  }
+
   //  LOGIC
   function playRadio() {
-    const radioStations = document.querySelectorAll('radio-item');
-    radioStations.forEach((radio) => {
+    elements.radioStations.forEach((radio) => {
       radio.addEventListener('click', function(e) {
         const clickedElement = e.target;
 
-        if (!document.getElementById('page-body').classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
+        if (!elements.pageBody.classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
           const clickedUrl = clickedElement.getAttribute('data-url');
           const clickedName = clickedElement.getAttribute('data-name');
-          const rndID = Math.floor(Math.random() * (999999999 - 10 + 1) + 10);
-          const audioPlayer = videojs('videojs-audio');
-          let audioType = '';
-          const stopButton = document.querySelector('stop-button');
-          const radioName = document.querySelector('.radio-name');
-          const radioLabel = document.querySelector('.radio-label');
-          const playerBar = document.getElementById('player');
           const radioCover = clickedElement.getAttribute('data-cover');
-          const filterList = document.querySelector('filter-list');
-          const searchFilter = document.querySelector('.filter-search');
-          const searchFilterInput = document.querySelector('.filter-search input');
+          const rndID = Math.floor(Math.random() * 999999989) + 10;
+          const audioPlayer = videojs('videojs-audio');
+          
+          // Determine audio type more efficiently
+          const audioType = clickedUrl.includes('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
 
-          if (clickedUrl.includes('.m3u8')) {
-            audioType = 'application/x-mpegURL';
-          } else {
-            audioType = 'video/mp4';
-          }
-
-          radioStations.forEach((item) => { item.classList.remove('playin'); });
-          audioPlayer.src({ type: audioType, src: clickedUrl + '?rndid=' + rndID });
+          // Clear previous playing state
+          clearPlayingState();
+          
+          // Set up new audio source and play
+          audioPlayer.src({ type: audioType, src: `${clickedUrl}?rndid=${rndID}` });
           audioPlayer.play();
-          radioName.textContent = clickedName;
-          radioLabel.textContent = "Radio";
-          stopButton.classList.add('stopin');
-          clickedElement.classList.add('playin');
-          audioNavigator(clickedName,"r.a.d.i.o",radioCover);
-          filterList.classList.add('playin-some-stuff');
-          document.title = '♫♪.♪♫.♪♫ Now playing: ' + clickedName + ' radio station ♪♫.♫♪.♫♪';
+          
+          // Update UI
+          updatePlayingState(clickedElement, clickedName, radioCover);
         }
       });
     });
   };
 
   function stopRadio() {
-    const stopButton = document.querySelector('stop-button');
-    stopButton.addEventListener('click', function(e) {
+    elements.stopButton.addEventListener('click', function(e) {
       const audioPlayer = videojs('videojs-audio');
-      const radioStations = document.querySelectorAll('radio-item');
-      const stopButton = document.querySelector('stop-button');
-      const radioName = document.querySelector('.radio-name');
-      const radioLabel = document.querySelector('.radio-label');
-      const nyanCatImage = document.getElementById('nyancat');
-      const pageBody = document.querySelector('#page-body');
-      const filterList = document.querySelector('filter-list');
 
-      radioStations.forEach((item) => {
-        item.classList.remove('playin');
-      });
-
-      radioName.textContent = "Play That";
-      radioLabel.textContent = "Funky Music";
-      stopButton.classList.remove('stopin');
-      audioPlayer.pause();
-      audioPlayer.src('');
-      pageBody.classList.remove('show-playin', 'show-favs');
-      filterList.classList.remove('playin-some-stuff');
-      document.title = '.░C░.░P░.░8░.░.░.░P░.░A░.░4░.░I░.░O░.';
+      // Clear playing state and reset UI
+      clearPlayingState();
+      resetPlayerUI(audioPlayer);
     });
-  };
+  }
 
-  function audioNavigator(title,artist,cover) {
+  function resetPlayerUI(audioPlayer) {
+    elements.radioName.textContent = "Play That";
+    elements.radioLabel.textContent = "Funky Music";
+    elements.stopButton.classList.remove('stopin');
+    audioPlayer.pause();
+    audioPlayer.src('');
+    elements.pageBody.classList.remove('show-playin', 'show-favs');
+    elements.filterList.classList.remove('playin-some-stuff');
+    document.title = '.░C░.░P░.░8░.░.░.░P░.░A░.░4░.░I░.░O░.';
+  }
+
+  function audioNavigator(title, artist, cover) {
     if ('mediaSession' in navigator) {
-
       navigator.mediaSession.metadata = new MediaMetadata({
         title: title,
         artist: artist,
@@ -91,45 +100,24 @@ document.addEventListener("DOMContentLoaded", function() {
         ]
       });
 
-      navigator.mediaSession.setActionHandler('play', function() {
-        const audioPlayer = videojs('videojs-audio');
-        audioPlayer.play();
-      });
+      const audioPlayer = videojs('videojs-audio');
 
-      navigator.mediaSession.setActionHandler('pause', function() {
-        const audioPlayer = videojs('videojs-audio');
-        audioPlayer.pause();
-      });
-
-      navigator.mediaSession.setActionHandler('stop', function() {
-        document.querySelectorAll('radio-item').forEach((item) => {
-          item.classList.remove('playin');
-        });
-        document.querySelector('.radio-name').textContent = "Play That";
-        document.querySelector('.radio-label').textContent = "Funky Music";
-        document.querySelector('stop-button').classList.remove('stopin');
-        const audioPlayer = videojs('videojs-audio');
-        audioPlayer.pause();
-        audioPlayer.src('');
+      navigator.mediaSession.setActionHandler('play', () => audioPlayer.play());
+      navigator.mediaSession.setActionHandler('pause', () => audioPlayer.pause());
+      navigator.mediaSession.setActionHandler('stop', () => {
+        clearPlayingState();
+        resetPlayerUI(audioPlayer);
       });
     }
-  };
+  }
 
-  function filterRadioStations () {
-    const playinFilter = document.querySelector('.filter-playin');
-    //const favsFilter = document.querySelector('.show-favs');
-    const allFilter = document.querySelector('.filter-all');
-    const searchFilter = document.querySelector('.filter-search');
-    const searchFilterInput = document.querySelector('.filter-search input');
-    const pageBody = document.querySelector('#page-body');
-    const radioStations = document.querySelectorAll('radio-item');
-
-    playinFilter.addEventListener('click', function(e) {
-      pageBody.classList.add('show-playin');
-      pageBody.classList.remove('show-favs');
-      searchFilter.classList.remove('show-search');
-      searchFilterInput.value = '';
-      radioStations.forEach(station => { station.classList.remove('search-hide'); });
+  function filterRadioStations() {
+    elements.playinFilter.addEventListener('click', function(e) {
+      elements.pageBody.classList.add('show-playin');
+      elements.pageBody.classList.remove('show-favs');
+      elements.searchFilter.classList.remove('show-search');
+      elements.searchFilterInput.value = '';
+      elements.radioStations.forEach(station => { station.classList.remove('search-hide'); });
     });
 
     // favsFilter.addEventListener('click', function(e) {
@@ -137,37 +125,49 @@ document.addEventListener("DOMContentLoaded", function() {
     //   pageBody.classList.remove('show-playin');
     // });
 
-    allFilter.addEventListener('click', function(e) {
-      pageBody.classList.remove('show-playin', 'show-favs');
-      searchFilter.classList.remove('show-search');
-      searchFilterInput.value = '';
+    elements.allFilter.addEventListener('click', function(e) {
+      elements.pageBody.classList.remove('show-playin', 'show-favs');
+      elements.searchFilter.classList.remove('show-search');
+      elements.searchFilterInput.value = '';
 
-      const filterList = document.querySelector('filter-list');
-      if (filterList.classList.contains('playin-some-stuff')) {
+      if (elements.filterList.classList.contains('playin-some-stuff')) {
         const playingRadioStation = document.querySelector('.playin');
-        const listOfRadios = document.querySelector('.list-of-radios');
-        radioStations.forEach(station => { station.classList.remove('search-hide'); });
+        elements.radioStations.forEach(station => { station.classList.remove('search-hide'); });
         
-        const positionFromTopOfScrollableDiv = playingRadioStation.offsetTop;
-        listOfRadios.scrollTop = positionFromTopOfScrollableDiv - 80;
+        if (playingRadioStation) {
+          const positionFromTopOfScrollableDiv = playingRadioStation.offsetTop;
+          elements.listOfRadios.scrollTop = positionFromTopOfScrollableDiv - 80;
+        }
       }
     });
 
-    searchFilter.addEventListener('click', function(e) {
-      searchFilter.classList.add('show-search');
-      searchFilterInput.focus();
+    elements.searchFilter.addEventListener('click', function(e) {
+      elements.searchFilter.classList.add('show-search');
+      elements.searchFilterInput.focus();
     });
 
-    searchFilterInput.addEventListener('keyup', (e) => {
-      if (e.target.value.length > 0) {
-        pageBody.classList.remove('show-playin', 'show-favs');
-        const filters = e.target.value.split(/\s/).filter(s => s.trim().length > 0).map(s => new RegExp(s, 'gi'));
-        radioStations.forEach(station => station.classList.toggle('search-hide', !filters.some(regex => station.dataset.name.match(regex))));
-      } else {
-        radioStations.forEach(station => {
-          station.classList.remove('search-hide');
-        })
-      }
+    // Debounce search for better performance
+    let searchTimeout;
+    elements.searchFilterInput.addEventListener('keyup', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        if (e.target.value.length > 0) {
+          elements.pageBody.classList.remove('show-playin', 'show-favs');
+          const filters = e.target.value.split(/\s/)
+            .filter(s => s.trim().length > 0)
+            .map(s => new RegExp(s, 'gi'));
+          
+          elements.radioStations.forEach(station => 
+            station.classList.toggle('search-hide', 
+              !filters.some(regex => station.dataset.name.match(regex))
+            )
+          );
+        } else {
+          elements.radioStations.forEach(station => {
+            station.classList.remove('search-hide');
+          });
+        }
+      }, 150); // 150ms debounce
     });
   }
 });
