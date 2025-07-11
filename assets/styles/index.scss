@@ -1,10 +1,10 @@
 //BASE
-@import "base/reset";
-@import "base/base";
+@use "base/reset";
+@use "base/base";
 
 //PAGE
-@import "page/layout";
-@import "page/sidebar";
-@import "page/topbar";
-@import "page/radiolist";
-@import "page/player";
+@use "page/layout";
+@use "page/sidebar";
+@use "page/topbar";
+@use "page/radiolist";
+@use "page/player";
