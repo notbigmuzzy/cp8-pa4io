@@ -37,32 +37,68 @@ document.addEventListener("DOMContentLoaded", function() {
   //  LOGIC
   function playRadio() {
     elements.radioStations.forEach((radio) => {
-      radio.addEventListener('click', function(e) {
-        const clickedElement = e.target;
-
-        if (!elements.pageBody.classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
-          const clickedUrl = clickedElement.getAttribute('data-url');
-          const clickedName = clickedElement.getAttribute('data-name');
-          const radioCover = clickedElement.getAttribute('data-cover');
-          const rndID = Math.floor(Math.random() * 999999989) + 10;
-          const audioPlayer = videojs('videojs-audio');
-          
-          // Determine audio type more efficiently
-          const audioType = clickedUrl.includes('.m3u8') ? 'application/x-mpegURL' : 'video/mp4';
-
-          // Clear previous playing state
-          clearPlayingState();
-          
-          // Set up new audio source and play
-          audioPlayer.src({ type: audioType, src: `${clickedUrl}?rndid=${rndID}` });
-          audioPlayer.play();
-          
-          // Update UI
-          updatePlayingState(clickedElement, clickedName, radioCover);
-        }
-      });
+      radio.addEventListener('click', handleRadioClick);
     });
-  };
+  }
+
+  function handleRadioClick(e) {
+    const clickedElement = e.target;
+
+    if (!elements.pageBody.classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
+      const clickedUrl = clickedElement.getAttribute('data-url');
+      const clickedName = clickedElement.getAttribute('data-name');
+      const radioCover = clickedElement.getAttribute('data-cover');
+      const rndID = Math.floor(Math.random() * 999999989) + 10;
+      const audioPlayer = videojs('videojs-audio');
+      
+      // Determine audio type more efficiently
+      const audioType = clickedUrl.includes('.m3u8') ? 'application/x-mpegURL' : 'audio/mpeg';
+
+      // Clear previous playing state
+      clearPlayingState();
+      
+      // Clear previous event listeners to avoid duplicates
+      audioPlayer.off('loadstart');
+      audioPlayer.off('canplay');
+      audioPlayer.off('playing');
+      audioPlayer.off('error');
+      
+      // Set up the stream
+      console.log('Starting stream for:', clickedUrl);
+      
+      audioPlayer.src({ 
+        type: audioType, 
+        src: `${clickedUrl}?rndid=${rndID}` 
+      });
+
+      audioPlayer.on('loadstart', () => {
+        console.log('Loading started');
+        audioPlayer.addClass('vjs-waiting');
+      });
+
+      audioPlayer.on('canplay', () => {
+        console.log('Can start playing');
+        audioPlayer.removeClass('vjs-waiting');
+      });
+
+      audioPlayer.on('playing', () => {
+        console.log('Actually playing');
+        audioPlayer.removeClass('vjs-waiting');
+        audioPlayer.addClass('vjs-playing');
+      });
+
+      audioPlayer.on('error', () => {
+        console.error('Unable to play this stream');
+        audioPlayer.error('Unable to play this stream');
+      });
+
+      // Start playback
+      audioPlayer.play();
+      
+      // Update UI
+      updatePlayingState(clickedElement, clickedName, radioCover);
+    }
+  }
 
   function stopRadio() {
     elements.stopButton.addEventListener('click', function(e) {
@@ -78,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
     elements.radioName.textContent = "Play That";
     elements.radioLabel.textContent = "Funky Music";
     elements.stopButton.classList.remove('stopin');
+    
     audioPlayer.pause();
     audioPlayer.src('');
     elements.pageBody.classList.remove('show-playin', 'show-favs');
