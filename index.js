@@ -21,14 +21,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Helper functions
   function clearPlayingState() {
-    elements.radioStations.forEach(station => station.classList.remove('playin'));
+    elements.radioStations.forEach(station => station.classList.remove('playin', 'loadin'));
   }
 
   function updatePlayingState(clickedElement, clickedName, radioCover) {
     elements.radioName.textContent = clickedName;
     elements.radioLabel.textContent = "Radio";
     elements.stopButton.classList.add('stopin');
-    clickedElement.classList.add('playin');
     audioNavigator(clickedName, "r.a.d.i.o", radioCover);
     elements.filterList.classList.add('playin-some-stuff');
     document.title = '♫♪.♪♫.♪♫ Now playing: ' + clickedName + ' radio station ♪♫.♫♪.♫♪';
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function handleRadioClick(e) {
     const clickedElement = e.target;
 
-    if (!elements.pageBody.classList.contains('show-playin') && !clickedElement.classList.contains('playin')) {
+    if (!elements.pageBody.classList.contains('show-playin') && !clickedElement.classList.contains('playin') && !clickedElement.classList.contains('loadin')) {
       const clickedUrl = clickedElement.getAttribute('data-url');
       const clickedName = clickedElement.getAttribute('data-name');
       const radioCover = clickedElement.getAttribute('data-cover');
@@ -72,23 +71,22 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       audioPlayer.on('loadstart', () => {
-        console.log('Loading started');
         audioPlayer.addClass('vjs-waiting');
+        clickedElement.classList.add('loadin');
       });
 
       audioPlayer.on('canplay', () => {
-        console.log('Can start playing');
         audioPlayer.removeClass('vjs-waiting');
       });
 
       audioPlayer.on('playing', () => {
-        console.log('Actually playing');
         audioPlayer.removeClass('vjs-waiting');
         audioPlayer.addClass('vjs-playing');
+        clickedElement.classList.add('playin');
+        clickedElement.classList.remove('loadin');
       });
 
       audioPlayer.on('error', () => {
-        console.error('Unable to play this stream');
         audioPlayer.error('Unable to play this stream');
       });
 
